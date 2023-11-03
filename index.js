@@ -2,11 +2,13 @@ const express = require('express'); //frameWork nodejs crea servidores
 
 //express(); al ejecutarse crea un servidor
 
-const server = express();
+const app = express();
 
-server.get('/', (req, res) => {
-    res.send('<h1>Hola</h1>')
+app.get('/', (req, res) => {
+    res.sendFile('./static/index.html', {
+        root: __dirname
+    })
 })
 
             //puerto
-server.listen(3000, () => console.log('server on port 3000'))
+app.listen(3000, () => console.log('server on port 3000'))
