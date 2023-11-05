@@ -22,6 +22,7 @@ app.post('/users', (req, res) => {
 
 //params
 app.get('/hello/:username', (req, res) => {
+    console.log(req.query)
     res.send(`hello ${req.params.username}`)
 })
 
