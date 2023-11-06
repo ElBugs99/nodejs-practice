@@ -1,4 +1,5 @@
 const express = require('express'); //frameWork
+const morgan = require('morgan');
 
 //express(); creates a server on execution
 
@@ -9,6 +10,15 @@ app.use(express.text())
 app.use(express.json())
 app.use(express.urlencoded({extended: false})) //form data interpreter
 
+//middleware
+app.use((req, res, next) => {
+    console.log('paso por aqui')
+
+    next()
+})
+
+app.use(morgan('dev'))
+
 app.get('/', (req, res) => {
     res.sendFile('./static/index.html', {
         root: __dirname
@@ -18,6 +28,11 @@ app.get('/', (req, res) => {
 app.post('/users', (req, res) => {
     console.log(req.body)
     res.send('usuario creado')
+})
+
+app.all('/all', (req, res) => {
+    console.log(req.body)
+    res.send('hello')
 })
 
 //params
