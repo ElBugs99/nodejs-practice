@@ -12,9 +12,16 @@ const products = [
     }
 ]
 
+//settings
+app.set('appName', 'Express Course')
+app.set('port', 3000)
+app.set('case sensitive routing', true)
+
+//middlewares
 app.use(morgan('dev'))
 app.use(express.json())
 
+//routes
 app.get('/products', (req, res) => {
     res.json(products)
 })
@@ -45,6 +52,38 @@ app.get('/products/:id', (req, res) => {
     res.send(productFound)
 })
 
-app.listen(3000, )
+app.delete('/products/:id', (req, res) => {
+    const productFound = products.find((product) => product.id === parseInt(req.params.id))
 
-console.log('server on port 3000')
+    if (!productFound) return res.status(404).json({
+        message: "product not Found"
+    })
+
+    const newProducts = products.filter( p => p.id !== parseInt(req.params.id) )
+    console.log(newProducts)
+
+    res.send('eliminando producto')
+})
+
+app.put('/products/:id', (req, res) => {
+
+    const newData = req.body
+    const productFound = products.find((product) => product.id === parseInt(req.params.id))
+
+    if (!productFound) return res.status(404).json({
+        message: "product not Found"
+    })
+
+    products.map( p => p.id === parseInt(req.params.id) ? {...p , ...newData} : p )
+
+    const newProducts = products.filter( p => p.id !== parseInt(req.params.id) )
+    console.log(newProducts)
+
+    res.json({
+        message: "product succesfully updated"
+    })
+})
+
+app.listen(app.get('port') )
+
+console.log(`server ${app.get('appName')} on port ${app.get('port')}`)
