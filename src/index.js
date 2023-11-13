@@ -2,6 +2,7 @@
 
 const express = require('express')
 const morgan = require('morgan')
+const userRoutes = require('./routes/userRoutes')
 
 const app = express()
 const products = [
@@ -22,6 +23,8 @@ app.use(morgan('dev'))
 app.use(express.json())
 
 //routes
+
+
 app.get('/products', (req, res) => {
     res.json(products)
 })
