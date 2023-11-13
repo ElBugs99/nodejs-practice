@@ -3,6 +3,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const userRoutes = require('./routes/userRoutes')
+const homes = require('./routes/homes')
 
 const app = express()
 const products = [
@@ -22,8 +23,11 @@ app.set('case sensitive routing', true)
 app.use(morgan('dev'))
 app.use(express.json())
 
+app.use(homes)//import homes routes
+
 //routes
 
+userRoutes(app)
 
 app.get('/products', (req, res) => {
     res.json(products)
