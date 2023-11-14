@@ -4,6 +4,7 @@ const express = require('express')
 const morgan = require('morgan')
 const userRoutes = require('./routes/userRoutes')
 const homes = require('./routes/homes')
+const axios = require('axios')
 
 const app = express()
 const products = [
@@ -89,6 +90,14 @@ app.put('/products/:id', (req, res) => {
     res.json({
         message: "product succesfully updated"
     })
+})
+
+app.get('/posts', async (req, res) => {
+
+    const response = await axios.get('https://jsonplaceholder.typicode.com/todos/')
+    console.log(response.data)
+
+    res.send(response.data)
 })
 
 app.listen(app.get('port') )
