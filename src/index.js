@@ -1,7 +1,12 @@
-import puppeteer from 'puppeteer'; //siempre utiliza codigo asincrono
+import puppeteer from 'puppeteer'; //siempre utiliza codigo asincrono, (await)
 
+async function openWebPage() {
 
+    const browser = await puppeteer.launch();// inicializa puppeteer, da un objeto llamado browser
 
+}
+
+openWebPage();
 
 
 //REST API CRUD
