@@ -1,6 +1,6 @@
 //REST API CRUD
 
-const express = require('express')
+/* const express = require('express')
 const morgan = require('morgan')
 const userRoutes = require('./routes/userRoutes')
 const homes = require('./routes/homes')
@@ -102,4 +102,4 @@ app.get('/posts', async (req, res) => {
 
 app.listen(app.get('port') )
 
-console.log(`server ${app.get('appName')} on port ${app.get('port')}`)
+console.log(`server ${app.get('appName')} on port ${app.get('port')}`) */
