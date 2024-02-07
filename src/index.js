@@ -37,12 +37,10 @@ async function captureScreenShot() {
 async function navigatePage() {
 
     const browser = await puppeteer.launch({
-
         headless: true, 
     });
 
     const page = await browser.newPage();
-    //navegar a pagina
     await page.goto('https://quotes.toscrape.com/')
     await page.click('a[href="/login"]')//navegar a otra pagina
     //await new Promise(r => setTimeout(r, 5000)); //esperar 5seg antes de ejecutar siguente instruccion
@@ -50,9 +48,37 @@ async function navigatePage() {
     await browser.close()//terminar ejecucion
 }
 
-navigatePage();
-//captureScreenShot();
+async function getDataFromWebPage() {
 
+    const browser = await puppeteer.launch({
+        headless: true, 
+    });
+
+    const page = await browser.newPage();
+
+    await page.goto('https://example.com')
+
+    //Ejecuta funciones de manipulacion de DOM (querySelector, getElementById, etc.)
+    const result = await page.evaluate(() => {
+     
+        const title = document.querySelector('h1').innerText
+        const description = document.querySelector('p').innerText
+        const more = document.querySelector('a').innerText
+        //objeto
+        return {
+            title,
+            description,
+            more
+        }
+    })
+    console.log(result);
+    await browser.close()//terminar ejecucion
+}
+
+getDataFromWebPage()
+
+//navigatePage();
+//captureScreenShot();
 //openWebPage();
 
 
