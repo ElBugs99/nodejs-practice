@@ -1,3 +1,9 @@
+import puppeteer from 'puppeteer'; //siempre utiliza codigo asincrono
+
+
+
+
+
 //REST API CRUD
 
 /* const express = require('express')
