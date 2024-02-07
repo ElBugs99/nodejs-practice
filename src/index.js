@@ -2,11 +2,43 @@ import puppeteer from 'puppeteer'; //siempre utiliza codigo asincrono, (await)
 
 async function openWebPage() {
 
-    const browser = await puppeteer.launch();// inicializa puppeteer, da un objeto llamado browser
+    // inicializa puppeteer, da un objeto llamado browser
+    
+    const browser = await puppeteer.launch({
 
+        headless: false, //false: abre la pagina fisicamente en el navegador,
+                        //true: ejecuta la pagina por debajo sin abrirla fisicamente
+        slowMo: 500 //tiempo de demora para poder ver fisicamente lo que hace 
+    });
+
+    const page = await browser.newPage();
+    //navegar a pagina
+    await page.goto('https://example.com')
+
+    await browser.close()//terminar ejecucion
 }
 
-openWebPage();
+
+async function captureScreenShot() {
+
+    // inicializa puppeteer, da un objeto llamado browser
+    
+    const browser = await puppeteer.launch({
+
+        headless: false, 
+        slowMo: 500
+    });
+
+    const page = await browser.newPage();
+    //navegar a pagina
+    await page.goto('https://example.com')
+    await page.screenshot({path: 'example.png'})
+    await browser.close()//terminar ejecucion
+}
+
+captureScreenShot();
+
+//openWebPage();
 
 
 //REST API CRUD
