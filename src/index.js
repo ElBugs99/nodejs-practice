@@ -18,25 +18,40 @@ async function openWebPage() {
     await browser.close()//terminar ejecucion
 }
 
-
+//sacar captura
 async function captureScreenShot() {
 
-    // inicializa puppeteer, da un objeto llamado browser
-    
     const browser = await puppeteer.launch({
 
-        headless: false, 
-        slowMo: 500
+        headless: true, 
     });
 
     const page = await browser.newPage();
     //navegar a pagina
-    await page.goto('https://example.com')
-    await page.screenshot({path: 'example.png'})
+    await page.goto('https://quotes.toscrape.com/')
+    await page.screenshot({path: 'example.png'})//sacar captura de pantalla
     await browser.close()//terminar ejecucion
 }
 
-captureScreenShot();
+//navegar entre paginas
+async function navigatePage() {
+
+    const browser = await puppeteer.launch({
+
+        headless: true, 
+    });
+
+    const page = await browser.newPage();
+    //navegar a pagina
+    await page.goto('https://quotes.toscrape.com/')
+    await page.click('a[href="/login"]')//navegar a otra pagina
+    //await new Promise(r => setTimeout(r, 5000)); //esperar 5seg antes de ejecutar siguente instruccion
+    await page.screenshot({path: 'example.png'})//sacar captura de pantalla
+    await browser.close()//terminar ejecucion
+}
+
+navigatePage();
+//captureScreenShot();
 
 //openWebPage();
 
