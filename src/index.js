@@ -75,8 +75,26 @@ async function getDataFromWebPage() {
     await browser.close()//terminar ejecucion
 }
 
-getDataFromWebPage()
+//
+async function handleDynamicWebPage() {
 
+    const browser = await puppeteer.launch({
+        headless: true, 
+    });
+
+    const page = await browser.newPage();
+
+    await page.goto('https://quotes.toscrape.com/')
+
+    //Ejecuta funciones de manipulacion de DOM (querySelector, getElementById, etc.)
+    const result = await page.evaluate(() => {
+        document.querySelector('h1').innerText
+    })
+    console.log(result);
+    await browser.close()//terminar ejecucion
+}
+
+getDataFromWebPage()
 //navigatePage();
 //captureScreenShot();
 //openWebPage();
