@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer'; //siempre utiliza codigo asincrono, (await)
+import fs from "fs/promises";
 
 async function openWebPage() {
 
@@ -84,17 +85,33 @@ async function handleDynamicWebPage() {
 
     const page = await browser.newPage();
 
-    await page.goto('https://quotes.toscrape.com/')
+    await page.goto('https://quotes.toscrape.com')
 
     //Ejecuta funciones de manipulacion de DOM (querySelector, getElementById, etc.)
     const result = await page.evaluate(() => {
-        document.querySelector('h1').innerText
+       const quotes = document.querySelectorAll('.quote')//devuelve un valor iterable (nodeList) //sin innertext
+       //Transformar de nodeList a arreglo para poder mapear
+       const data = [...quotes].map(quote => {
+        const quoteText = quote.querySelector('.text').innerText;
+        const author = quote.querySelector('.author').innerText;
+        const tags = [...quote.querySelectorAll('.tag')].map((tag) =>  //almacenar todos los tags en un arreglo
+            tag.innerText
+        );
+        return {
+            quoteText,
+            author,
+            tags
+        }
+       });
+        return data;        
     })
-    console.log(result);
+    console.log(result.length)
+   console.log(result);
     await browser.close()//terminar ejecucion
 }
 
-getDataFromWebPage()
+handleDynamicWebPage()
+//getDataFromWebPage()
 //navigatePage();
 //captureScreenShot();
 //openWebPage();
