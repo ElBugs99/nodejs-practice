@@ -110,7 +110,20 @@ async function handleDynamicWebPage() {
     await browser.close()//terminar ejecucion
 }
 
-handleDynamicWebPage()
+
+
+const getTags = async () => {
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage;
+    await page.goto('https://quotes.toscrape.com');
+    
+}
+
+
+
+getTags();
+//handleDynamicWebPage()
 //getDataFromWebPage()
 //navigatePage();
 //captureScreenShot();
