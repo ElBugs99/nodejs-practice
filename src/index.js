@@ -115,9 +115,18 @@ async function handleDynamicWebPage() {
 const getTags = async () => {
 
     const browser = await puppeteer.launch();
-    const page = await browser.newPage;
+    const page = await browser.newPage();
     await page.goto('https://quotes.toscrape.com');
+
+    const result = page.evaluate(() => {
+
+        const element = page.querySelectorAll('.tags-box');
+        return element
+    })
     
+    console.log(result);
+
+    await browser.close();
 }
 
 
