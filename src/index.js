@@ -118,9 +118,9 @@ const getTags = async () => {
     const page = await browser.newPage();
     await page.goto('https://quotes.toscrape.com');
 
-    const result = page.evaluate(() => {
+    const result = await page.evaluate(() => {
 
-        const element = page.querySelectorAll('.tags-box');
+        const element = document.querySelectorAll('.tags-box');
         return element
     })
     
