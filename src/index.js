@@ -131,7 +131,7 @@ const getTags = async () => {
     
     console.log(result);
 
-    await fs.writeFile('data.json', json.stringify(result));
+    await fs.writeFile('data.json', JSON.stringify(result));
 
     await browser.close();
 }
