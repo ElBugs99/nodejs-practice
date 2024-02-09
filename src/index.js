@@ -120,11 +120,17 @@ const getTags = async () => {
 
     const result = await page.evaluate(() => {
 
-        const element = document.querySelectorAll('.tags-box');
-        return element
+        const tag = document.querySelector('.tags-box');
+        const tagName = tag.querySelectorAll('.tag-item');
+
+        const data = [...tagName].map((tag) => tag.innerText)
+        
+        return data;
     })
     
     console.log(result);
+
+    fs.writeFile()
 
     await browser.close();
 }
