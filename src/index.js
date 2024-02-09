@@ -113,7 +113,6 @@ async function handleDynamicWebPage() {
 }
 
 
-
 const getTags = async () => {
 
     const browser = await puppeteer.launch();
@@ -136,8 +135,6 @@ const getTags = async () => {
 
     await browser.close();
 }
-
-
 
 getTags();
 //handleDynamicWebPage()
