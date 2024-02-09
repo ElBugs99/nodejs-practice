@@ -1,5 +1,7 @@
 import puppeteer from 'puppeteer'; //siempre utiliza codigo asincrono, (await)
 import fs from "fs/promises";
+import { stringify } from 'querystring';
+import { json } from 'express';
 
 async function openWebPage() {
 
@@ -130,7 +132,7 @@ const getTags = async () => {
     
     console.log(result);
 
-    fs.writeFile('data.json')
+    fs.writeFile('data.json', json.stringify(result))
 
     await browser.close();
 }
